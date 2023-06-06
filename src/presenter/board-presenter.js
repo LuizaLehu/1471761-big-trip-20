@@ -23,16 +23,10 @@ export default class BoardPresenter {
   #points = [];
   #currentSortType = SortType.DAY;
 
-  //#boardComponent = new BoardView();
-  //#eventListComponent = new EventListView();
-
-  //#pointListComponent = new EventListView();
-
-
   #noPointComponent = new EmptyListView();
 
-  //#boardPoints = [];
-  //#handleDataChange = null;
+  #boardPoints = [];
+  #handleDataChange = null;
 
   #pointPresenters = new Map();
 
@@ -53,7 +47,6 @@ export default class BoardPresenter {
 
     const pointPresenter = new PointPresenter({
       container: this.#eventListComponent.element,
-      // boardContainer: this.#eventListComponent.element,
       destinationsModel: this.#destinationsModel,
       offersModel: this.#offersModel,
       onChangeData: this.#pointChangeHandler,
@@ -64,7 +57,6 @@ export default class BoardPresenter {
 
     this.#pointPresenters.set(point.id, pointPresenter);
   };
-
 
   #sortPoints = (sortType) => {
     this.#currentSortType = sortType;

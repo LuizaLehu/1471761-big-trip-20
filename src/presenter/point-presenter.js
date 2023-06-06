@@ -27,7 +27,6 @@ export default class PointPresenter {
     this.#onChangeData = onChangeData;
     this.#onChangeMode = onChangeMode;
 
-
   }
 
   init(point) {
