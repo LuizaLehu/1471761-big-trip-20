@@ -288,3 +288,14 @@ export default class PointEditView extends AbstractStatefulView {
 
 }
 
+
+/* task edit view
+
+
+import flatpickr from 'flatpickr';
+import 'flatpickr/dist/flatpickr.min.css';
+
+dupa export default.....
+#datepicker = null;
+
+*/
