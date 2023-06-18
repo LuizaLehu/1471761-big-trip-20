@@ -2,7 +2,7 @@ import dayjs from 'dayjs';
 import { getRandomInteger } from '../utils/common.js';
 import { TripDuration } from './const.js';
 
-let date = dayjs().subtract(getRandomInteger(0, TripDuration.DAY), 'day').toDate;
+let date = dayjs().subtract(getRandomInteger(0, TripDuration.DAY), 'day').toDate();
 
 function getDate({ next }) {
   const minsGap = getRandomInteger(0, TripDuration.MIN);

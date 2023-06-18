@@ -13,15 +13,12 @@ function getRandomArrayElement(items) {
   return items[Math.floor(Math.random() * items.length)];
 }
 
-const isEscapeKey = (evt) => evt.key === 'Escape' || evt.key === 'Esc';
-
-function updateItem(items, update) {
-  return items.map((item) => item.id === update.id ? update : item);
+function isEscapeKey(evt) {
+  return evt.key === 'Escape' || evt.key === 'Esc';
 }
 
 
 export {
-  updateItem,
   getRandomArrayElement,
   getRandomInteger,
   getRandomValue,

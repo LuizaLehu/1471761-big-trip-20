@@ -47,6 +47,10 @@ const SortType = {
   OFFERS: 'offers',
 };
 
+
+const DEFAULT_SORT_TYPE = 'DAY';
+
+
 const EnabledSortType = {
   [SortType.DAY]: true,
   [SortType.EVENT]: false,
@@ -64,12 +68,34 @@ const EMPTY_POINT = {
   isFavorite: false,
   offers: [],
   type: DEFAULT_TYPE,
+
+};
+
+const UserAction = {
+  UPDATE_POINT: 'UPDATE_POINT',
+  ADD_POINT: 'ADD_POINT',
+  DELETE_POINT: 'DELETE_POINT',
+};
+
+const UpdateType = {
+  PATCH: 'PATCH',
+  MINOR: 'MINOR',
+  MAJOR: 'MAJOR',
+
+};
+
+const EditingType = {
+  EDITING: 'EDITING',
+  CREATING: 'CREATING'
 };
 
 export {
+  EditingType,
+  UserAction,
+  UpdateType,
   EMPTY_POINT,
-  EVENT_TYPES_LIST,
   OFFERS,
+  EVENT_TYPES_LIST,
   EnabledSortType,
   SortType,
   Mode,
@@ -79,4 +105,5 @@ export {
   TYPES,
   DEFAULT_TYPE,
   FilterType,
+  DEFAULT_SORT_TYPE
 };
