@@ -21,7 +21,7 @@ function humaniseDate(eventDate, dateFormat) {
 }
 
 function formatStringToDateTime(date) {
-  return dayjs(date).format('YYYY-MM-DD HH:mm');
+  return dayjs(date).format('YYYY-MM-DDTHH:mm');
 }
 
 function formatStringToShortDate(date) {
@@ -56,10 +56,8 @@ function getPointDuration(dateFrom, dateTo) {
   return pointDuration;
 }
 
-const getDatesDiff = (dateFrom, dateTo, timeUnit) => timeUnit ? dayjs(dateTo).diff(dayjs(dateFrom), timeUnit) : dayjs(dateTo).diff(dayjs(dateFrom));
-
 function getDate(date) {
-  return dayjs(date).format('DD/MM/YY HH:mm');
+  return dayjs(date).format('DD/MM/YY HH;mm');
 }
 
 function isPointFuture(point) {
@@ -89,16 +87,9 @@ function getPointsPriceDifference(pointA, pointB) {
   return pointB.basePrice - pointA.basePrice;
 }
 
-
-function isDatesEqual(dateA, dateB) {
-  return (dateA === null && dateB === null) || dayjs(dateA).isSame(dateB, 'D');
-}
-
 export {
-  isDatesEqual,
-  getDatesDiff,
-  humaniseDate,
   formatDateTime,
+  humaniseDate,
   getPointsDateDifference,
   getPointsDurationsDifference,
   getPointsPriceDifference,
@@ -112,4 +103,3 @@ export {
   isPointPresent,
   isPointPast
 };
-

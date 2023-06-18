@@ -1,34 +1,31 @@
 import AbstractView from '../framework/view/abstract-view.js';
 import { capitalize } from '../utils/point.js';
 
-
-function createFilterItemTemplate(filter, currentFilterType) {
-  const { type, count } = filter;
+function createFilterItemTemplate(filter) {
 
   return `
         <input
-         id="filter-${type}"
+         id="filter-${filter.type}"
          class="trip-filters__filter-input  visually-hidden"
          type="radio"
          name="trip-filter"
-         ${type === currentFilterType ? 'checked' : ''}
-         ${count === 0 ? 'disabled' : ''}
-         value="${type}"
+          value="${filter.type}"
+         ${(filter.hasPoints) ? '' : 'disabled'}
           />
         <label
         class="trip-filters__filter-label"
-        for="filter-${type}"
+        for="filter-${filter.type}"
         >
-        ${capitalize(type)}
+        ${capitalize(filter.type)}
         </label>
       </div>
       `;
 }
 
-function createFilterTemplate(filterItems, currentFilterType) {
+function createFilterTemplate(filterItems) {
 
   const filterItemsTemplate = filterItems
-    .map((filter) => createFilterItemTemplate(filter, currentFilterType))
+    .map((filter) => createFilterItemTemplate(filter))
     .join('');
 
   return (
@@ -39,26 +36,13 @@ function createFilterTemplate(filterItems, currentFilterType) {
 }
 export default class FilterView extends AbstractView {
   #filters = null;
-  #currentFilter = null;
-  #handleFilterTypeChange = null;
 
-
-  constructor({ filters, currentFilterType, onFilterTypeChange }) {
+  constructor({ filters }) {
     super();
     this.#filters = filters;
-    this.#currentFilter = currentFilterType;
-    this.#handleFilterTypeChange = onFilterTypeChange;
-
-    this.element.addEventListener('change', this.#filterTypeChangeHandler);
   }
 
   get template() {
-    return createFilterTemplate(this.#filters, this.#currentFilter);
+    return createFilterTemplate(this.#filters);
   }
-
-  #filterTypeChangeHandler = (evt) => {
-    evt.preventDefault();
-    this.#handleFilterTypeChange(evt.target.value);
-  };
-
 }

@@ -1,11 +1,9 @@
 import WaypointView from '../view/waypoint-view.js';
 import PointEditView from '../view/point-edit-view.js';
 
-import { UserAction, UpdateType } from '../const.js';
 import { remove, render, replace } from '../framework/render.js';
 import { isEscapeKey } from '../utils/common.js';
 import { Mode } from '../const.js';
-import { isDatesEqual } from '../utils/point.js';
 
 export default class PointPresenter {
   #container = null;
@@ -22,7 +20,7 @@ export default class PointPresenter {
   #point = null;
   #mode = Mode.DEFAULT;
 
-  constructor({ container, onChangeData, onChangeMode, destinationsModel, offersModel }) {
+  constructor({container, destinationsModel, offersModel, onChangeData, onChangeMode }) {
     this.#container = container;
     this.#destinationsModel = destinationsModel;
     this.#offersModel = offersModel;
@@ -32,7 +30,6 @@ export default class PointPresenter {
   }
 
   init(point) {
-
     this.#point = point;
 
     const prevPointComponent = this.#pointComponent;
@@ -51,9 +48,7 @@ export default class PointPresenter {
       pointDestinations: this.#destinationsModel.destinations,
       pointOffers: this.#offersModel.offers,
       onResetClick: this.#resetButtonClickHandler,
-      onSubmitClick: this.#onSubmitClick,
-      onDeleteClick: this.#handleDeleteClick
-
+      //onSubmitClick: this.#handleFormSubmit,
     });
 
     if (prevPointComponent === null || prevPointEditComponent === null) {
@@ -111,38 +106,19 @@ export default class PointPresenter {
   };
 
   #handleFavoriteClick = () => {
-    this.#onChangeData(
-      UserAction.UPDATE_POINT,
-      UpdateType.MINOR,
-      { ...this.#point, isFavorite: !this.#point.isFavorite },
-    );
+    this.#onChangeData({
+      ...this.#point,
+      isFavorite: !this.#point.isFavorite
+    });
   };
 
   #resetButtonClickHandler = () => {
     this.#replaceFormToPoint();
   };
 
-  #onSubmitClick = (update) => {
-
-    const isMinorUpdate =
-      !isDatesEqual(this.#point.dueDate, update.dueDate);
-
-    this.#onChangeData(
-      UserAction.UPDATE_POINT,
-
-      isMinorUpdate ? UpdateType.MINOR : UpdateType.PATCH,
-      update,
-    );
+  #handlerFormSubmit = (point) => {
+    this.#onChangeData(point);
     this.#replaceFormToPoint();
-  };
-
-  #handleDeleteClick = (point) => {
-    this.#onChangeData(
-      UserAction.DELETE_POINT,
-      UpdateType.MINOR,
-      point,
-    );
-
   };
 
 }

@@ -1,12 +1,11 @@
-
 import { getRandomArrayElement, getRandomInteger } from '../utils/common.js';
 import { Price } from './const.js';
-import { getDate } from '../mock/utils.js';
+import { getDate } from '../utils/point.js';
 import { nanoid } from 'nanoid';
 
 function generatePoint(type, destinationId, offerIds) {
   return {
-    id: nanoid(),
+    id: crypto.randomUUID(),
     basePrice: getRandomInteger(Price.MIN, Price.MAX),
     dateFrom: getDate({ next: false }),
     dateTo: getDate({ next: true }),
@@ -16,6 +15,7 @@ function generatePoint(type, destinationId, offerIds) {
     type
   };
 }
+
 
 const mockPoints = [
   {
@@ -118,4 +118,3 @@ function getRandomPoint() {
 }
 
 export { generatePoint, getRandomPoint };
-
